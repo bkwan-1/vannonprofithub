@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Nonprofits - Vancouver Nonprofit Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>🌊 Vancouver Nonprofit Hub</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html" class="active">Browse</a></li>
+                <li><a href="submit.html">List Your Org</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Browse Nonprofits</h1>
+            <p>Discover Vancouver organizations making a difference</p>
+        </div>
+    </section>
+
+    <!-- Nonprofits Section -->
+    <section class="nonprofits-section">
+        <div class="container">
+            <div id="nonprofits-grid" class="nonprofits-grid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Vancouver Nonprofit Hub. Built for Vancouver's community.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('nonprofits-grid');
+            const nonprofits = getNonprofits();
+
+            if (nonprofits.length === 0) {
+                grid.innerHTML = '<p class="no-results">No nonprofits listed yet. Be the first to <a href="submit.html">add one</a>!</p>';
+                return;
+            }
+
+            grid.innerHTML = nonprofits.map(org => `
+                <div class="nonprofit-card">
+                    <div class="card-header">
+                        <h3>${escapeHtml(org.name)}</h3>
+                        <span class="category-badge">${escapeHtml(org.category)}</span>
+                    </div>
+                    <p class="description">${escapeHtml(org.description)}</p>
+                    <div class="card-footer">
+                        ${org.website ? `<a href="${escapeHtml(org.website)}" target="_blank" rel="noopener noreferrer" class="card-link">🌐 Website</a>` : ''}
+                        <a href="mailto:${escapeHtml(org.email)}" class="card-link">✉️ Contact</a>
+                    </div>
+                </div>
+            `).join('');
+        });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
