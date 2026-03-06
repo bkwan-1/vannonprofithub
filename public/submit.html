@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Nonprofit - Vancouver Nonprofit Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>🌊 Vancouver Nonprofit Hub</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="submit.html" class="active">List Your Org</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>List Your Nonprofit</h1>
+            <p>Get your organization listed and connect with supporters</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <form id="nonprofit-form">
+                    <div class="form-group">
+                        <label for="name">Organization Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="e.g., Vancouver Community Foundation">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Environment">Environment</option>
+                            <option value="Health & Wellness">Health & Wellness</option>
+                            <option value="Education">Education</option>
+                            <option value="Youth & Children">Youth & Children</option>
+                            <option value="Housing & Homelessness">Housing & Homelessness</option>
+                            <option value="Food Security">Food Security</option>
+                            <option value="Arts & Culture">Arts & Culture</option>
+                            <option value="Animal Welfare">Animal Welfare</option>
+                            <option value="Social Justice">Social Justice</option>
+                            <option value="Indigenous Rights">Indigenous Rights</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Short Description *</label>
+                        <textarea id="description" name="description" required rows="4" placeholder="Brief description of your organization's mission and work"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://yourorganization.org">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Contact Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="contact@yourorganization.org">
+                    </div>
+
+                    <div id="form-message" class="form-message" style="display: none;"></div>
+
+                    <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+                        List Your Nonprofit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Vancouver Nonprofit Hub. Built for Vancouver's community.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const form = document.getElementById('nonprofit-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formMessage = document.getElementById('form-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value.trim(),
+                website: document.getElementById('website').value.trim(),
+                email: document.getElementById('email').value.trim()
+            };
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            formMessage.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/nonprofits', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Submission failed');
+                }
+
+                const result = await response.json();
+
+                // Show success message
+                formMessage.style.display = 'block';
+                formMessage.className = 'form-message success';
+                formMessage.textContent = '✅ Success! Your nonprofit has been listed. Redirecting to browse page...';
+
+                // Reset form
+                form.reset();
+
+                // Redirect to browse page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'browse.html';
+                }, 2000);
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                formMessage.style.display = 'block';
+                formMessage.className = 'form-message error';
+                formMessage.textContent = '❌ Failed to submit. Please try again.';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'List Your Nonprofit';
+            }
+        });
+    </script>
+</body>
+</html>
