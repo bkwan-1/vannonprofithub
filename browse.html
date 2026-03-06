@@ -11,7 +11,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h2>🌊 Vancouver Nonprofit Hub</h2>
+                <a href="index.html">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -30,6 +33,42 @@
         </div>
     </section>
 
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label for="search-input">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </label>
+                    <input type="text" id="search-input" placeholder="Search organizations..." />
+                </div>
+                <div class="filter-group">
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="Environment">Environment</option>
+                        <option value="Health & Wellness">Health & Wellness</option>
+                        <option value="Education">Education</option>
+                        <option value="Youth & Children">Youth & Children</option>
+                        <option value="Housing & Homelessness">Housing & Homelessness</option>
+                        <option value="Food Security">Food Security</option>
+                        <option value="Arts & Culture">Arts & Culture</option>
+                        <option value="Animal Welfare">Animal Welfare</option>
+                        <option value="Social Justice">Social Justice</option>
+                        <option value="Indigenous Rights">Indigenous Rights</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="results-count">
+                <span id="results-count">0</span> organizations found
+            </div>
+        </div>
+    </section>
+
     <!-- Nonprofits Section -->
     <section class="nonprofits-section">
         <div class="container">
@@ -40,35 +79,95 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Vancouver Nonprofit Hub. Built for Vancouver's community.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="browse.html">Browse</a>
+                    <a href="submit.html">Submit</a>
+                    <a href="about.html">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vancouver Nonprofit Hub. Built with ❤️ for Vancouver's community.</p>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
     <script>
+        let allNonprofits = [];
+
         document.addEventListener('DOMContentLoaded', () => {
+            allNonprofits = getNonprofits();
+            displayNonprofits(allNonprofits);
+
+            // Setup filters
+            document.getElementById('search-input').addEventListener('input', filterNonprofits);
+            document.getElementById('category-filter').addEventListener('change', filterNonprofits);
+        });
+
+        function displayNonprofits(nonprofits) {
             const grid = document.getElementById('nonprofits-grid');
-            const nonprofits = getNonprofits();
+            const count = document.getElementById('results-count');
+            
+            count.textContent = nonprofits.length;
 
             if (nonprofits.length === 0) {
-                grid.innerHTML = '<p class="no-results">No nonprofits listed yet. Be the first to <a href="submit.html">add one</a>!</p>';
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <h3>No organizations found</h3>
+                        <p>Try adjusting your search or <a href="submit.html">be the first to add one</a>!</p>
+                    </div>
+                `;
                 return;
             }
 
             grid.innerHTML = nonprofits.map(org => `
                 <div class="nonprofit-card">
-                    <div class="card-header">
-                        <h3>${escapeHtml(org.name)}</h3>
-                        <span class="category-badge">${escapeHtml(org.category)}</span>
-                    </div>
+                    <div class="card-badge">${escapeHtml(org.category)}</div>
+                    <h3>${escapeHtml(org.name)}</h3>
                     <p class="description">${escapeHtml(org.description)}</p>
                     <div class="card-footer">
-                        ${org.website ? `<a href="${escapeHtml(org.website)}" target="_blank" rel="noopener noreferrer" class="card-link">🌐 Website</a>` : ''}
-                        <a href="mailto:${escapeHtml(org.email)}" class="card-link">✉️ Contact</a>
+                        ${org.website ? `
+                            <a href="${escapeHtml(org.website)}" target="_blank" rel="noopener noreferrer" class="card-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="2" y1="12" x2="22" y2="12"/>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                                Visit Website
+                            </a>
+                        ` : ''}
+                        <a href="mailto:${escapeHtml(org.email)}" class="card-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            Contact
+                        </a>
                     </div>
                 </div>
             `).join('');
-        });
+        }
+
+        function filterNonprofits() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+
+            const filtered = allNonprofits.filter(org => {
+                const matchesSearch = org.name.toLowerCase().includes(searchTerm) || 
+                                    org.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = category === 'all' || org.category === category;
+                return matchesSearch && matchesCategory;
+            });
+
+            displayNonprofits(filtered);
+        }
 
         function escapeHtml(text) {
             const div = document.createElement('div');

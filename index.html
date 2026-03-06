@@ -11,7 +11,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h2>🌊 Vancouver Nonprofit Hub</h2>
+                <a href="index.html">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
@@ -24,15 +27,51 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-background"></div>
         <div class="container">
-            <h1>Discover and Support Vancouver Nonprofits</h1>
-            <p class="hero-subtitle">
-                Connect with local organizations making a difference in our community. 
-                Find volunteer opportunities, support causes you care about, and help nonprofits reach more people.
-            </p>
-            <div class="hero-buttons">
-                <a href="browse.html" class="btn btn-primary">Browse Nonprofits</a>
-                <a href="submit.html" class="btn btn-secondary">List Your Nonprofit</a>
+            <div class="hero-content">
+                <h1 class="hero-title">Discover and Support<br>Vancouver Nonprofits</h1>
+                <p class="hero-subtitle">
+                    Connect with local organizations making a difference in our community. 
+                    Find volunteer opportunities, support causes you care about, and help nonprofits reach more people.
+                </p>
+                <div class="hero-buttons">
+                    <a href="browse.html" class="btn btn-primary">
+                        <span>Browse Nonprofits</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="submit.html" class="btn btn-secondary">
+                        <span>List Your Nonprofit</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-number" id="total-orgs">0</div>
+                    <div class="stat-label">Organizations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤝</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free to List</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌟</div>
+                    <div class="stat-number">Local</div>
+                    <div class="stat-label">Vancouver Focus</div>
+                </div>
             </div>
         </div>
     </section>
@@ -40,42 +79,48 @@
     <!-- Features Section -->
     <section class="features">
         <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to connect with Vancouver nonprofits</p>
+            </div>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3>Community Impact</h3>
-                    <p>Discover local nonprofits working to improve our community and make Vancouver a better place for everyone.</p>
+                    <div class="feature-number">01</div>
+                    <div class="feature-icon">🔍</div>
+                    <h3>Discover</h3>
+                    <p>Browse our directory of local nonprofits working to improve our community across various causes and missions.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🙋</div>
-                    <h3>Volunteering</h3>
-                    <p>Find meaningful volunteer opportunities with organizations aligned with your values and interests.</p>
+                    <div class="feature-number">02</div>
+                    <div class="feature-icon">💡</div>
+                    <h3>Connect</h3>
+                    <p>Find organizations aligned with your values and interests. Reach out directly through their contact information.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🏙️</div>
-                    <h3>Local Organizations</h3>
-                    <p>Support Vancouver-based nonprofits dedicated to causes like environment, health, education, and social justice.</p>
+                    <div class="feature-number">03</div>
+                    <div class="feature-icon">🎯</div>
+                    <h3>Support</h3>
+                    <p>Volunteer your time, make donations, or simply spread the word about causes you care about in Vancouver.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <!-- Categories Section -->
+    <section class="categories-section">
         <div class="container">
-            <h2>Are you a nonprofit?</h2>
-            <p>Get your organization listed and connect with volunteers, donors, and supporters.</p>
-            <a href="submit.html" class="btn btn-primary">List Your Organization</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Vancouver Nonprofit Hub. Built for Vancouver's community.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+            <div class="section-header">
+                <h2>Explore by Category</h2>
+                <p>Find nonprofits working in areas you're passionate about</p>
+            </div>
+            <div class="categories-grid">
+                <a href="browse.html" class="category-card">
+                    <div class="category-icon">🌱</div>
+                    <div class="category-name">Environment</div>
+                </a>
+                <a href="browse.html" class="category-card">
+                    <div class="category-icon">❤️</div>
+                    <div class="category-name">Health & Wellness</div>
+                </a>
+                <a href="browse.html" class="category-card">
+                    <div class="category-icon">📚</div>

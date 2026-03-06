@@ -11,7 +11,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h2>🌊 Vancouver Nonprofit Hub</h2>
+                <a href="index.html">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -34,49 +37,83 @@
     <section class="form-section">
         <div class="container">
             <div class="form-container">
+                <div class="form-intro">
+                    <h2>Submit Your Organization</h2>
+                    <p>Fill out the form below to get your nonprofit listed in our directory. It's completely free!</p>
+                </div>
+
                 <form id="nonprofit-form">
-                    <div class="form-group">
-                        <label for="name">Organization Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="e.g., Vancouver Community Foundation">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">
+                                Organization Name *
+                                <span class="label-hint">The official name of your nonprofit</span>
+                            </label>
+                            <input type="text" id="name" name="name" required placeholder="e.g., Vancouver Community Foundation">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="category">Category *</label>
-                        <select id="category" name="category" required>
-                            <option value="">Select a category</option>
-                            <option value="Environment">Environment</option>
-                            <option value="Health & Wellness">Health & Wellness</option>
-                            <option value="Education">Education</option>
-                            <option value="Youth & Children">Youth & Children</option>
-                            <option value="Housing & Homelessness">Housing & Homelessness</option>
-                            <option value="Food Security">Food Security</option>
-                            <option value="Arts & Culture">Arts & Culture</option>
-                            <option value="Animal Welfare">Animal Welfare</option>
-                            <option value="Social Justice">Social Justice</option>
-                            <option value="Indigenous Rights">Indigenous Rights</option>
-                            <option value="Other">Other</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">
+                                Category *
+                                <span class="label-hint">Primary area of focus</span>
+                            </label>
+                            <select id="category" name="category" required>
+                                <option value="">Select a category</option>
+                                <option value="Environment">Environment</option>
+                                <option value="Health & Wellness">Health & Wellness</option>
+                                <option value="Education">Education</option>
+                                <option value="Youth & Children">Youth & Children</option>
+                                <option value="Housing & Homelessness">Housing & Homelessness</option>
+                                <option value="Food Security">Food Security</option>
+                                <option value="Arts & Culture">Arts & Culture</option>
+                                <option value="Animal Welfare">Animal Welfare</option>
+                                <option value="Social Justice">Social Justice</option>
+                                <option value="Indigenous Rights">Indigenous Rights</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="description">Short Description *</label>
-                        <textarea id="description" name="description" required rows="4" placeholder="Brief description of your organization's mission and work"></textarea>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="description">
+                                Short Description *
+                                <span class="label-hint">Brief overview of your mission (2-3 sentences)</span>
+                            </label>
+                            <textarea id="description" name="description" required rows="4" placeholder="Describe your organization's mission, programs, and impact..."></textarea>
+                            <div class="char-count">
+                                <span id="char-count">0</span> / 500 characters
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="website">Website URL</label>
-                        <input type="url" id="website" name="website" placeholder="https://yourorganization.org">
-                    </div>
+                    <div class="form-row form-row-split">
+                        <div class="form-group">
+                            <label for="website">
+                                Website URL
+                                <span class="label-hint">Your organization's website</span>
+                            </label>
+                            <input type="url" id="website" name="website" placeholder="https://yourorganization.org">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="email">Contact Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="contact@yourorganization.org">
+                        <div class="form-group">
+                            <label for="email">
+                                Contact Email *
+                                <span class="label-hint">Primary contact email</span>
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="contact@yourorganization.org">
+                        </div>
                     </div>
 
                     <div id="form-message" class="form-message" style="display: none;"></div>
 
-                    <button type="submit" class="btn btn-primary btn-full">
-                        List Your Nonprofit
+                    <button type="submit" class="btn btn-submit">
+                        <span>List Your Nonprofit</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
                     </button>
                 </form>
             </div>
@@ -86,7 +123,21 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Vancouver Nonprofit Hub. Built for Vancouver's community.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="browse.html">Browse</a>
+                    <a href="submit.html">Submit</a>
+                    <a href="about.html">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vancouver Nonprofit Hub. Built with ❤️ for Vancouver's community.</p>
+            </div>
         </div>
     </footer>
 
@@ -94,6 +145,21 @@
     <script>
         const form = document.getElementById('nonprofit-form');
         const formMessage = document.getElementById('form-message');
+        const descriptionInput = document.getElementById('description');
+        const charCount = document.getElementById('char-count');
+
+        // Character counter
+        descriptionInput.addEventListener('input', () => {
+            const length = descriptionInput.value.length;
+            charCount.textContent = length;
+            
+            if (length > 500) {
+                charCount.style.color = '#d32f2f';
+                descriptionInput.value = descriptionInput.value.substring(0, 500);
+            } else {
+                charCount.style.color = '#666666';
+            }
+        });
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -107,22 +173,36 @@
                 createdAt: new Date().toISOString()
             };
 
+            // Validation
+            if (formData.description.length < 20) {
+                showMessage('Please provide a more detailed description (at least 20 characters).', 'error');
+                return;
+            }
+
             // Save to localStorage
             addNonprofit(formData);
 
             // Show success message
-            formMessage.style.display = 'block';
-            formMessage.className = 'form-message success';
-            formMessage.textContent = '✅ Success! Your nonprofit has been listed. Redirecting...';
+            showMessage('✅ Success! Your nonprofit has been listed. Redirecting to browse page...', 'success');
 
             // Reset form
             form.reset();
+            charCount.textContent = '0';
 
-            // Redirect after 1.5 seconds
+            // Redirect after 2 seconds
             setTimeout(() => {
                 window.location.href = 'browse.html';
-            }, 1500);
+            }, 2000);
         });
+
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = `form-message ${type}`;
+            formMessage.style.display = 'block';
+            
+            // Scroll to message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     </script>
 </body>
 </html>

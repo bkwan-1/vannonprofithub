@@ -11,7 +11,10 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h2>🌊 Vancouver Nonprofit Hub</h2>
+                <a href="index.html">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -33,8 +36,10 @@
     <!-- About Content -->
     <section class="about-section">
         <div class="container">
-            <div class="about-content">
-                <div class="about-card">
+            <div class="about-grid">
+                <!-- Mission Card -->
+                <div class="about-card card-large">
+                    <div class="card-icon">🎯</div>
                     <h2>Our Mission</h2>
                     <p>
                         This platform was created to help Vancouver nonprofits gain more visibility and connect with people who want to make a difference in their community.
@@ -44,30 +49,99 @@
                     </p>
                 </div>
 
+                <!-- Founders Card -->
                 <div class="about-card">
+                    <div class="card-icon">👥</div>
                     <h2>Our Founders</h2>
-                    <div class="founders">
-                        <div class="founder">
-                            <h3>Brandon Kwan</h3>
-                        </div>
-                        <div class="founder">
-                            <h3>Wallace Cheng</h3>
-                        </div>
+                    <div class="founders-list">
+                        <div class="founder-name">Brandon Kwan</div>
+                        <div class="founder-name">Wallace Cheng</div>
                     </div>
                     <p>
                         Brandon Kwan and Wallace Cheng created this platform to make it easier for nonprofits in Vancouver to share their mission and attract volunteers and supporters. Having witnessed the challenges many local organizations face in reaching their community, they built this hub to bridge the gap between passionate people and meaningful causes.
                     </p>
                 </div>
 
+                <!-- Values Card -->
                 <div class="about-card">
-                    <h2>What We Offer</h2>
-                    <ul class="feature-list">
-                        <li>✅ Free nonprofit directory listing</li>
-                        <li>✅ Easy-to-use submission process</li>
-                        <li>✅ Increased visibility for local organizations</li>
-                        <li>✅ Direct connection with potential volunteers and donors</li>
-                        <li>✅ Community-focused platform built for Vancouver</li>
+                    <div class="card-icon">💎</div>
+                    <h2>Our Values</h2>
+                    <ul class="values-list">
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Community-first approach
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Transparency and trust
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Accessibility for all
+                        </li>
+                        <li>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Supporting local impact
+                        </li>
                     </ul>
+                </div>
+
+                <!-- Features Card -->
+                <div class="about-card card-large">
+                    <div class="card-icon">✨</div>
+                    <h2>What We Offer</h2>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-item-icon">🆓</div>
+                            <div>
+                                <h3>Free Listings</h3>
+                                <p>100% free for all nonprofits to list and promote their organization</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-icon">⚡</div>
+                            <div>
+                                <h3>Instant Publishing</h3>
+                                <p>Your listing goes live immediately after submission</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-icon">🔍</div>
+                            <div>
+                                <h3>Easy Discovery</h3>
+                                <p>Searchable directory makes it simple for supporters to find you</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-item-icon">🌊</div>
+                            <div>
+                                <h3>Vancouver Focused</h3>
+                                <p>Built specifically for our local nonprofit community</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="about-cta">
+                <h2>Ready to get started?</h2>
+                <p>Join our growing community of Vancouver nonprofits making a difference</p>
+                <div class="cta-buttons">
+                    <a href="browse.html" class="btn btn-primary">
+                        <span>Browse Organizations</span>
+                    </a>
+                    <a href="submit.html" class="btn btn-secondary">
+                        <span>List Your Nonprofit</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -76,7 +150,21 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Vancouver Nonprofit Hub. Built for Vancouver's community.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="browse.html">Browse</a>
+                    <a href="submit.html">Submit</a>
+                    <a href="about.html">About</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vancouver Nonprofit Hub. Built with ❤️ for Vancouver's community.</p>
+            </div>
         </div>
     </footer>
 
