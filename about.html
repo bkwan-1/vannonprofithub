@@ -4,156 +4,484 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Vancouver Nonprofit Hub</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --color-text: #0a0a0a;
+            --color-text-secondary: #64748b;
+            --color-border: #e2e8f0;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8fafc;
+            --color-bg-tertiary: #f1f5f9;
+            --color-accent: #0f3d5e;
+            --color-accent-hover: #0a2d45;
+            --color-accent-light: #e8f2f7;
+            --color-beige: #f5f1e8;
+            --color-beige-dark: #e8e0d3;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --spacing-4xl: 5rem;
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .nav {
+            background: linear-gradient(to bottom, var(--color-accent), var(--color-accent-hover));
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .nav-logo svg {
+            color: var(--color-beige);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .nav-link {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--spacing-sm);
+            color: white;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+        }
+
+        .about-content {
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .about-grid {
+            display: grid;
+            gap: var(--spacing-2xl);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            padding: var(--spacing-3xl);
+            background-color: white;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            border-color: var(--color-accent-light);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(15, 61, 94, 0.12);
+        }
+
+        .about-card h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-xl);
+            color: var(--color-accent);
+            letter-spacing: -0.02em;
+        }
+
+        .about-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.0625rem;
+        }
+
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .founders {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .founder {
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--color-beige) 0%, var(--color-beige-dark) 100%);
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--color-accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .features-list {
+            list-style: none;
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            padding: var(--spacing-lg);
+            background-color: var(--color-bg-secondary);
+            border-radius: var(--radius-lg);
+            transition: all 0.2s ease;
+        }
+
+        .features-list li:hover {
+            background-color: var(--color-accent-light);
+            transform: translateX(8px);
+        }
+
+        .features-list svg {
+            color: var(--color-accent);
+            flex-shrink: 0;
+        }
+
+        .features-list span {
+            font-size: 1.0625rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+            padding: var(--spacing-3xl);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            color: white;
+            margin-top: var(--spacing-2xl);
+        }
+
+        .cta-card h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+
+        .cta-card p {
+            font-size: 1.125rem;
+            margin-bottom: var(--spacing-xl);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background-color: white;
+            color: var(--color-accent);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-secondary {
+            background-color: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .button-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .footer {
+            background-color: var(--color-accent-hover);
+            color: white;
+            padding: var(--spacing-3xl) 0 var(--spacing-xl);
+            margin-top: var(--spacing-3xl);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.125rem;
+        }
+
+        .footer-logo svg {
+            color: var(--color-beige);
+        }
+
+        .footer-left p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.25rem;
+            }
+
+            .about-card {
+                padding: var(--spacing-xl);
+            }
+
+            .founders {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-card h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-lg);
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">
-                    <span class="logo-icon">🌊</span>
-                    <span class="logo-text">Vancouver Nonprofit Hub</span>
-                </a>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Vancouver Nonprofit Hub</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="browse.html" class="nav-link">Browse</a>
+                <a href="submit.html" class="nav-link">Submit</a>
+                <a href="about.html" class="nav-link active">About</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html">Browse</a></li>
-                <li><a href="submit.html">List Your Org</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-            </ul>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>About Vancouver Nonprofit Hub</h1>
-            <p>Our mission and story</p>
-        </div>
-    </section>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>About us</h1>
+                <p>Our mission and story</p>
+            </div>
+        </section>
 
-    <!-- About Content -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-grid">
-                <!-- Mission Card -->
-                <div class="about-card card-large">
-                    <div class="card-icon">🎯</div>
-                    <h2>Our Mission</h2>
-                    <p>
-                        This platform was created to help Vancouver nonprofits gain more visibility and connect with people who want to make a difference in their community.
-                    </p>
-                    <p>
-                        We believe that every nonprofit deserves the opportunity to share their mission and attract the volunteers and supporters they need to thrive. By providing a centralized directory, we make it easier for community members to discover and engage with the organizations working to improve our city.
-                    </p>
-                </div>
-
-                <!-- Founders Card -->
-                <div class="about-card">
-                    <div class="card-icon">👥</div>
-                    <h2>Our Founders</h2>
-                    <div class="founders-list">
-                        <div class="founder-name">Brandon Kwan</div>
-                        <div class="founder-name">Wallace Cheng</div>
+        <section class="about-content">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h2>Our mission</h2>
+                        <p>This platform was created to help Vancouver nonprofits gain more visibility and connect with people who want to make a difference in their community.</p>
+                        <p>We believe that every nonprofit deserves the opportunity to share their mission and attract the volunteers and supporters they need to thrive. By providing a centralized directory, we make it easier for community members to discover and engage with the organizations working to improve our city.</p>
                     </div>
-                    <p>
-                        Brandon Kwan and Wallace Cheng created this platform to make it easier for nonprofits in Vancouver to share their mission and attract volunteers and supporters. Having witnessed the challenges many local organizations face in reaching their community, they built this hub to bridge the gap between passionate people and meaningful causes.
-                    </p>
+
+                    <div class="about-card">
+                        <h2>Our founders</h2>
+                        <div class="founders">
+                            <div class="founder">Brandon Kwan</div>
+                            <div class="founder">Wallace Cheng</div>
+                        </div>
+                        <p>Brandon Kwan and Wallace Cheng created this platform to make it easier for nonprofits in Vancouver to share their mission and attract volunteers and supporters. Having witnessed the challenges many local organizations face in reaching their community, they built this hub to bridge the gap between passionate people and meaningful causes.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <h2>What we offer</h2>
+                        <ul class="features-list">
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Free nonprofit directory listing</span>
+                            </li>
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Easy submission process</span>
+                            </li>
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Increased visibility for local organizations</span>
+                            </li>
+                            <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Direct connection with volunteers and donors</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Values Card -->
-                <div class="about-card">
-                    <div class="card-icon">💎</div>
-                    <h2>Our Values</h2>
-                    <ul class="values-list">
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            Community-first approach
-                        </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            Transparency and trust
-                        </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            Accessibility for all
-                        </li>
-                        <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            Supporting local impact
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Features Card -->
-                <div class="about-card card-large">
-                    <div class="card-icon">✨</div>
-                    <h2>What We Offer</h2>
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <div class="feature-item-icon">🆓</div>
-                            <div>
-                                <h3>Free Listings</h3>
-                                <p>100% free for all nonprofits to list and promote their organization</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-item-icon">⚡</div>
-                            <div>
-                                <h3>Instant Publishing</h3>
-                                <p>Your listing goes live immediately after submission</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-item-icon">🔍</div>
-                            <div>
-                                <h3>Easy Discovery</h3>
-                                <p>Searchable directory makes it simple for supporters to find you</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-item-icon">🌊</div>
-                            <div>
-                                <h3>Vancouver Focused</h3>
-                                <p>Built specifically for our local nonprofit community</p>
-                            </div>
-                        </div>
+                <div class="cta-card">
+                    <h2>Ready to get started?</h2>
+                    <p>Join our growing community of Vancouver nonprofits making a difference</p>
+                    <div class="cta-buttons">
+                        <a href="browse.html" class="button button-primary">Browse organizations</a>
+                        <a href="submit.html" class="button button-secondary">List your nonprofit</a>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <!-- CTA -->
-            <div class="about-cta">
-                <h2>Ready to get started?</h2>
-                <p>Join our growing community of Vancouver nonprofits making a difference</p>
-                <div class="cta-buttons">
-                    <a href="browse.html" class="btn btn-primary">
-                        <span>Browse Organizations</span>
-                    </a>
-                    <a href="submit.html" class="btn btn-secondary">
-                        <span>List Your Nonprofit</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-icon">🌊</span>
-                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Vancouver Nonprofit Hub</span>
+                    </div>
+                    <p>&copy; 2024 Vancouver Nonprofit Hub</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html">Home</a>
@@ -162,12 +490,7 @@
                     <a href="about.html">About</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Vancouver Nonprofit Hub. Built with ❤️ for Vancouver's community.</p>
-            </div>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>

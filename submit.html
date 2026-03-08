@@ -3,62 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Your Nonprofit - Vancouver Nonprofit Hub</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Submit Organization - Vancouver Nonprofit Hub</title>
+    <style>
+        :root {
+            --color-text: #0a0a0a;
+            --color-text-secondary: #64748b;
+            --color-border: #e2e8f0;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8fafc;
+            --color-bg-tertiary: #f1f5f9;
+            --color-accent: #0f3d5e;
+            --color-accent-hover: #0a2d45;
+            --color-accent-light: #e8f2f7;
+            --color-beige: #f5f1e8;
+            --color-beige-dark: #e8e0d3;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --spacing-4xl: 5rem;
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .nav {
+            background: linear-gradient(to bottom, var(--color-accent), var(--color-accent-hover));
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .nav-logo svg {
+            color: var(--color-beige);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .nav-link {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--spacing-sm);
+            color: white;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+        }
+
+        .form-section {
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: var(--spacing-3xl);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.0625rem;
+            color: var(--color-accent);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem var(--spacing-lg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            background-color: var(--color-bg-secondary);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            background-color: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 0.9375rem;
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-sm);
+            font-weight: 500;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .form-message {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .form-message.error {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: 1rem 2.5rem;
+            font-size: 1.0625rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            border: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(15, 61, 94, 0.3);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(15, 61, 94, 0.4);
+        }
+
+        .button-full {
+            width: 100%;
+        }
+
+        .footer {
+            background-color: var(--color-accent-hover);
+            color: white;
+            padding: var(--spacing-3xl) 0 var(--spacing-xl);
+            margin-top: var(--spacing-3xl);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.125rem;
+        }
+
+        .footer-logo svg {
+            color: var(--color-beige);
+        }
+
+        .footer-left p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.25rem;
+            }
+
+            .form-container {
+                padding: var(--spacing-xl);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-lg);
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">
-                    <span class="logo-icon">🌊</span>
-                    <span class="logo-text">Vancouver Nonprofit Hub</span>
-                </a>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Vancouver Nonprofit Hub</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="browse.html" class="nav-link">Browse</a>
+                <a href="submit.html" class="nav-link active">Submit</a>
+                <a href="about.html" class="nav-link">About</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html">Browse</a></li>
-                <li><a href="submit.html" class="active">List Your Org</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>List Your Nonprofit</h1>
-            <p>Get your organization listed and connect with supporters</p>
-        </div>
-    </section>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>List your organization</h1>
+                <p>Join our directory and connect with supporters</p>
+            </div>
+        </section>
 
-    <!-- Form Section -->
-    <section class="form-section">
-        <div class="container">
-            <div class="form-container">
-                <div class="form-intro">
-                    <h2>Submit Your Organization</h2>
-                    <p>Fill out the form below to get your nonprofit listed in our directory. It's completely free!</p>
-                </div>
-
-                <form id="nonprofit-form">
-                    <div class="form-row">
+        <section class="form-section">
+            <div class="container">
+                <div class="form-container">
+                    <form id="submit-form">
                         <div class="form-group">
-                            <label for="name">
-                                Organization Name *
-                                <span class="label-hint">The official name of your nonprofit</span>
-                            </label>
-                            <input type="text" id="name" name="name" required placeholder="e.g., Vancouver Community Foundation">
+                            <label for="name">Organization name</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your organization name">
                         </div>
-                    </div>
 
-                    <div class="form-row">
                         <div class="form-group">
-                            <label for="category">
-                                Category *
-                                <span class="label-hint">Primary area of focus</span>
-                            </label>
+                            <label for="category">Category</label>
                             <select id="category" name="category" required>
                                 <option value="">Select a category</option>
                                 <option value="Environment">Environment</option>
@@ -74,59 +374,50 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="form-row">
                         <div class="form-group">
-                            <label for="description">
-                                Short Description *
-                                <span class="label-hint">Brief overview of your mission (2-3 sentences)</span>
-                            </label>
-                            <textarea id="description" name="description" required rows="4" placeholder="Describe your organization's mission, programs, and impact..."></textarea>
-                            <div class="char-count">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="5" required placeholder="Tell us about your organization's mission and work"></textarea>
+                            <div class="form-hint">
                                 <span id="char-count">0</span> / 500 characters
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-row form-row-split">
-                        <div class="form-group">
-                            <label for="website">
-                                Website URL
-                                <span class="label-hint">Your organization's website</span>
-                            </label>
-                            <input type="url" id="website" name="website" placeholder="https://yourorganization.org">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" id="website" name="website" placeholder="https://yoursite.org">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Contact email</label>
+                                <input type="email" id="email" name="email" required placeholder="contact@yourorg.org">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">
-                                Contact Email *
-                                <span class="label-hint">Primary contact email</span>
-                            </label>
-                            <input type="email" id="email" name="email" required placeholder="contact@yourorganization.org">
-                        </div>
-                    </div>
+                        <div id="form-message" class="form-message" style="display: none;"></div>
 
-                    <div id="form-message" class="form-message" style="display: none;"></div>
-
-                    <button type="submit" class="btn btn-submit">
-                        <span>List Your Nonprofit</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </form>
+                        <button type="submit" class="button button-primary button-full">
+                            Submit organization
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-icon">🌊</span>
-                    <span class="logo-text">Vancouver Nonprofit Hub</span>
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Vancouver Nonprofit Hub</span>
+                    </div>
+                    <p>&copy; 2024 Vancouver Nonprofit Hub</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html">Home</a>
@@ -135,74 +426,121 @@
                     <a href="about.html">About</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Vancouver Nonprofit Hub. Built with ❤️ for Vancouver's community.</p>
-            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
     <script>
-        const form = document.getElementById('nonprofit-form');
-        const formMessage = document.getElementById('form-message');
-        const descriptionInput = document.getElementById('description');
-        const charCount = document.getElementById('char-count');
-
-        // Character counter
-        descriptionInput.addEventListener('input', () => {
-            const length = descriptionInput.value.length;
-            charCount.textContent = length;
-            
-            if (length > 500) {
-                charCount.style.color = '#d32f2f';
-                descriptionInput.value = descriptionInput.value.substring(0, 500);
-            } else {
-                charCount.style.color = '#666666';
+        function initData() {
+            if (!localStorage.getItem('nonprofits')) {
+                const initial = [
+                    {
+                        name: "Ocean Wise Conservation Association",
+                        category: "Environment",
+                        description: "Protecting and restoring our oceans through cutting-edge research, impactful education programs, and direct community action across British Columbia and beyond.",
+                        website: "https://ocean.org",
+                        email: "info@ocean.org",
+                        createdAt: new Date('2024-01-15').toISOString()
+                    },
+                    {
+                        name: "Greater Vancouver Food Bank",
+                        category: "Food Security",
+                        description: "Providing nutritious food and essential support to those experiencing food insecurity across Metro Vancouver, serving over 28,000 people weekly.",
+                        website: "https://foodbank.bc.ca",
+                        email: "info@foodbank.bc.ca",
+                        createdAt: new Date('2024-01-20').toISOString()
+                    },
+                    {
+                        name: "Covenant House Vancouver",
+                        category: "Youth & Children",
+                        description: "Serving homeless and at-risk youth aged 16-24 with crisis shelter, transitional housing, and wraparound support services to help them build better futures.",
+                        website: "https://covenanthousebc.org",
+                        email: "info@covenanthousebc.org",
+                        createdAt: new Date('2024-01-25').toISOString()
+                    },
+                    {
+                        name: "Arts Umbrella",
+                        category: "Arts & Culture",
+                        description: "Transforming the lives of young people through professional arts education in dance, theatre, and visual arts on Granville Island.",
+                        website: "https://artsumbrella.com",
+                        email: "info@artsumbrella.com",
+                        createdAt: new Date('2024-02-01').toISOString()
+                    },
+                    {
+                        name: "BC SPCA Vancouver",
+                        category: "Animal Welfare",
+                        description: "Protecting and enhancing the quality of life for domestic, farm and wild animals through rescue, rehabilitation, adoption and advocacy programs.",
+                        website: "https://spca.bc.ca",
+                        email: "vancouver@spca.bc.ca",
+                        createdAt: new Date('2024-02-05').toISOString()
+                    }
+                ];
+                localStorage.setItem('nonprofits', JSON.stringify(initial));
             }
-        });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                category: document.getElementById('category').value,
-                description: document.getElementById('description').value.trim(),
-                website: document.getElementById('website').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                createdAt: new Date().toISOString()
-            };
-
-            // Validation
-            if (formData.description.length < 20) {
-                showMessage('Please provide a more detailed description (at least 20 characters).', 'error');
-                return;
-            }
-
-            // Save to localStorage
-            addNonprofit(formData);
-
-            // Show success message
-            showMessage('✅ Success! Your nonprofit has been listed. Redirecting to browse page...', 'success');
-
-            // Reset form
-            form.reset();
-            charCount.textContent = '0';
-
-            // Redirect after 2 seconds
-            setTimeout(() => {
-                window.location.href = 'browse.html';
-            }, 2000);
-        });
-
-        function showMessage(text, type) {
-            formMessage.textContent = text;
-            formMessage.className = `form-message ${type}`;
-            formMessage.style.display = 'block';
-            
-            // Scroll to message
-            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+
+        function getNonprofits() {
+            initData();
+            const data = localStorage.getItem('nonprofits');
+            const orgs = data ? JSON.parse(data) : [];
+            return orgs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+
+        function addNonprofit(org) {
+            const orgs = getNonprofits();
+            orgs.unshift(org);
+            localStorage.setItem('nonprofits', JSON.stringify(orgs));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('submit-form');
+            const descInput = document.getElementById('description');
+            const charCount = document.getElementById('char-count');
+            const formMessage = document.getElementById('form-message');
+
+            descInput.addEventListener('input', () => {
+                const len = descInput.value.length;
+                charCount.textContent = len;
+
+                if (len > 500) {
+                    descInput.value = descInput.value.substring(0, 500);
+                    charCount.textContent = 500;
+                }
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const data = {
+                    name: document.getElementById('name').value.trim(),
+                    category: document.getElementById('category').value,
+                    description: document.getElementById('description').value.trim(),
+                    website: document.getElementById('website').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    createdAt: new Date().toISOString()
+                };
+
+                if (data.description.length < 20) {
+                    showMessage('Please provide a more detailed description (at least 20 characters).', 'error');
+                    return;
+                }
+
+                addNonprofit(data);
+                showMessage('✓ Success! Your organization has been submitted.', 'success');
+
+                form.reset();
+                charCount.textContent = '0';
+
+                setTimeout(() => {
+                    window.location.href = 'browse.html';
+                }, 1500);
+            });
+
+            function showMessage(text, type) {
+                formMessage.textContent = text;
+                formMessage.className = `form-message ${type}`;
+                formMessage.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
